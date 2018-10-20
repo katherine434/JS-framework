@@ -17,9 +17,35 @@ $(document).ready(function(){
 		return ruta;
 	};
 
+
+	var a = 0;
+	while(a<6){
+
+		$(".col-1").prepend("<img src="+ randomRuta() +" style='width:112px;'>");
+		$(".col-2").prepend("<img src="+ randomRuta() +" style='width:112px;'>");
+		$(".col-3").prepend("<img src="+ randomRuta() +" style='width:112px;'>");
+		$(".col-4").prepend("<img src="+ randomRuta() +" style='width:112px;'>");
+		$(".col-5").prepend("<img src="+ randomRuta() +" style='width:112px;'>");
+		$(".col-6").prepend("<img src="+ randomRuta() +" style='width:112px;'>");
+		$(".col-7").prepend("<img src="+ randomRuta() +" style='width:112px;'>");
+
+		a++;
+	}
+
+	/*function gravedad(){
+
+		var a = $(".col-1").prepend("<img src="+ randomRuta() +" style='width:112px;' class='var'>");
+
+		$()
+
+		return a;
+	}
+
+	gravedad();
+
 	//primera col
 
-	$(".col-1").prepend("<img src="+ randomRuta() +" style='width:112px;'>")
+	/*$(".col-1").prepend("<img src="+ randomRuta() +" style='width:112px;'>")
 	$(".col-1").prepend("<img src="+ randomRuta() +" style='width:112px;'>")
 	$(".col-1").prepend("<img src="+ randomRuta() +" style='width:112px;'>")
 	$(".col-1").prepend("<img src="+ randomRuta() +" style='width:112px;'>")
@@ -83,7 +109,7 @@ $(document).ready(function(){
 	$(".col-7").prepend("<img src="+ randomRuta() +" style='width:112px;'>")
 	$(".col-7").prepend("<img src="+ randomRuta() +" style='width:112px;'>")
 
-
+*/
 
 
 });
