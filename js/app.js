@@ -18,8 +18,7 @@ $(document).ready(function(){
 
 	for (var b = 1; b < 7 ; b++) {
 		for (var c = 1; c <= 7 ; c++) {
-			var creacionDulces = $(".col-"+c).append("<img src="+ randomRuta() +" style='width:112px;' class='var' >");
-			arrayDulces[b][c] = creacionDulces;
+			var creacionDulces = $(".col-"+c).prepend("<img src="+ randomRuta() +" style='width:112px;' class='var' >");
 		}
 	}
 	
@@ -29,7 +28,25 @@ $(document).ready(function(){
 	 	revert: true,
 	 	cursorAt: {top: 56, left: 56}
 
+	 }).mousedown(function(){
+
+	 	var ima1 = $(this).attr("src");
+
+	 	console.log(ima1);
+
+	 }).mouseup(function(){
+
+	 	var ima2 = $(this).attr("src");
+
+	 	//$('.var').attr('src',ima2);
+
+	 	console.log(ima2);
+
 	 });
+
+
+
+
 	
 
 	// Dulces down
