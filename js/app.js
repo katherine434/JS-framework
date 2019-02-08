@@ -1,13 +1,8 @@
-	
-var arrayDulces = new Array(7);
-
 $(document).ready(function(){
-
+	var arrayDulces = new Array(7);
+	var i = 0;	
 
 	//Animación titulo
-
-
-	var i = 0;
 	while(i < 9000 ){
 		
 		$(".main-titulo").animate({color:"blue"}, 1000);		
@@ -15,18 +10,27 @@ $(document).ready(function(){
 		i++;		
 	}
 
+	
+
 	for(var a = 0; a< 7; a++){
 		arrayDulces[a] = new Array(7);
 	}
 
-
 	for (var b = 1; b < 7 ; b++) {
 		for (var c = 1; c <= 7 ; c++) {
-			
-			arrayDulces[b][c] = $(".col-"+c).append("<img src="+ randomRuta() +" style='width:112px;' class='var' >");
-
+			var creacionDulces = $(".col-"+c).append("<img src="+ randomRuta() +" style='width:112px;' class='var' >");
+			arrayDulces[b][c] = creacionDulces;
 		}
 	}
+	
+
+	 $(".var").draggable({
+
+	 	revert: true,
+	 	cursorAt: {top: 56, left: 56}
+
+	 });
+	
 
 	// Dulces down
 	function randomRuta(){
