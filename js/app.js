@@ -18,17 +18,40 @@ $(document).ready(function(){
 
 	for (var b = 1; b < 7 ; b++) {
 		for (var c = 1; c <= 7 ; c++) {
-			var creacionDulces = $(".col-"+c).prepend("<img src="+ randomRuta() +" style='width:112px;' class='var' >");
+			var creacionDulces = $(".col-"+c).prepend("<img src="+ randomRuta() +" style='width:112px'; class='dragdrop'>");
 		}
 	}
 	
 
-	 $(".var").draggable({
+	$(".dragdrop").draggable({
 
 	 	revert: true,
 	 	cursorAt: {top: 56, left: 56}
+	 }) 
 
-	 }).mousedown(function(){
+	$(".dragdrop").droppable({
+		
+		accept: ".dragdrop",
+		drop: function(event, ui) {
+
+			$(".dragdrop").mousedown(function(){
+
+
+				
+			})
+
+			console.log(drag, drop)
+
+			
+
+			//var scrObt = $(this).attr("scr");
+			//var scrDes = $(ui.draggable).attr("scr");		
+			// $(this).attr("scr", scrDes);
+			// $(ui.draggable).attr("src", scrObt);
+		}
+	})
+
+/*	.mousedown(function(){
 
 	 	var ima1 = $(this).attr("src");
 
@@ -38,11 +61,9 @@ $(document).ready(function(){
 
 	 	var ima2 = $(this).attr("src");
 
-	 	//$('.var').attr('src',ima2);
-
 	 	console.log(ima2);
 
-	 });
+	 });*/
 
 
 
@@ -53,7 +74,7 @@ $(document).ready(function(){
 	function randomRuta(){
 		var num = (Math.floor(Math.random()*3)+1);
 		var ruta = "image/" + num + ".png" ;
-		return ruta;
+		return ruta
 	};
 
 });
