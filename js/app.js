@@ -29,23 +29,18 @@ $(document).ready(function(){
 	 	cursorAt: {top: 56, left: 56}
 	 }) 
 
-	$(".dragdrop").droppable({
-		
+	.droppable({
 		accept: ".dragdrop",
-		drop: function(event, ui) {
-
-			$(".dragdrop").mousedown(function(){
-
-
-				
-			})
-
-			console.log(drag, drop)
-
+    	
+		drop: function(event, ui) {		
 			
+			var draggable = $(ui.dragabble).find(".dragdrop").attr("src");
+			console.log(draggable)
 
-			//var scrObt = $(this).attr("scr");
-			//var scrDes = $(ui.draggable).attr("scr");		
+			var scrObt = $(this).attr("src");
+			var scrDes = $(ui.draggable).attr("src");		
+
+			console.log(scrObt,scrDes)
 			// $(this).attr("scr", scrDes);
 			// $(ui.draggable).attr("src", scrObt);
 		}
