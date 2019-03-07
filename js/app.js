@@ -33,35 +33,15 @@ $(document).ready(function(){
 		accept: ".dragdrop",
     	
 		drop: function(event, ui) {		
-			
-			var draggable = $(ui.dragabble).find(".dragdrop").attr("src");
-			console.log(draggable)
 
-			var scrObt = $(this).attr("src");
-			var scrDes = $(ui.draggable).attr("src");		
+			var drop = $(this).attr("src");
+			var drag = $(ui.draggable).attr("src");		
 
-			console.log(scrObt,scrDes)
-			// $(this).attr("scr", scrDes);
-			// $(ui.draggable).attr("src", scrObt);
+			//console.log("soltar: ",drop, "arrastrado: " ,drag)
+			$(this).attr("src", drag);
+			$(ui.draggable).attr("src", drop); 
 		}
 	})
-
-/*	.mousedown(function(){
-
-	 	var ima1 = $(this).attr("src");
-
-	 	console.log(ima1);
-
-	 }).mouseup(function(){
-
-	 	var ima2 = $(this).attr("src");
-
-	 	console.log(ima2);
-
-	 });*/
-
-
-
 
 	
 
