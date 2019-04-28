@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+	/// Variables
+	var arrayDulces;
+	var seMovio = 0;
+
 	//Animación titulo
 	var i = 0;
 	while(i < 9000 ){
@@ -11,6 +15,7 @@ $(document).ready(function(){
 
 
 	creaDulces();
+	pintarDulces();
 	validador();
 
 	// -- Intercambio de dulces
@@ -26,18 +31,66 @@ $(document).ready(function(){
 		drop: function(event, ui) {		
 
 			var drop = $(this).attr("src");
+			var idIni = $(this).attr("id");
 			var drag = $(ui.draggable).attr("src");		
+			var idFin = $(ui.draggable).attr("id");
+
+			let fini = idIni.substr(5,1);
+			let cini = idIni.substr(12,1);
+			let ffin = idFin.substr(5,1);
+			let cfin = idFin.substr(12,1);
+
 
 			//console.log("soltar: ",drop, "arrastrado: " ,drag)
+			console.log("soltar:<" + drop + "> arrastrado:<" + drag + ">");
+			console.log("soltar:<" + idIni + "> arrastrado:<" + idFin + ">");
+			console.log("soltar:<" + fini + "," + cini + "> arrastrado:<" + ffin + "," + cfin + ">");
 			$(this).attr("src", drag);
 			$(ui.draggable).attr("src", drop); 
+			// Ahora actualizo el array
+			arrayDulces[fini][cini] = drag;
+			arrayDulces[ffin][cfin] = drop;
+			seMovio = seMovio + 1;
+			validador();
 		}
 	}) // --
 
 	function validador(){
 
-		for (var h = 1; h < 5; h++){
-			for(var j = 1; j < 8; j++){ //Columna
+		console.log("----------------------------------------------------")
+		console.log("Estoy validando con " + seMovio + " movimientos");
+		let cantMatch = 0;
+
+		for(var f = 1; f < 5 ; f++){
+			for(var c = 0; c < 7; c++){
+				let cv = arrayDulces[f][c] ;
+				let ca = arrayDulces[f - 1][c];
+				let cs = arrayDulces[f + 1][c];
+				if( (cv === ca) && (cv === cs) ){
+					cantMatch = cantMatch + 1;
+					console.log("Hago match por columnas en [" + (f + 1) + "][" + (c + 1) + "]");
+					console.log("CA:" + ca + ";CV:" + cv + ";CS:" + cs);
+				}
+			}
+		}
+
+		for(var c = 1; c < 6 ; c++){
+			for(var f = 0; f < 6; f++){
+				let cv = arrayDulces[f][c] ;
+				let ca = arrayDulces[f][c - 1];
+				let cs = arrayDulces[f][c + 1];
+				if( (cv === ca) && (cv === cs) ){
+					cantMatch = cantMatch + 1;
+					console.log("Hago match por filas en [" + (f + 1) + "][" + (c + 1) + "]");
+					console.log("CA:" + ca + ";CV:" + cv + ";CS:" + cs);
+				}
+			}
+		}
+
+		console.log("Se encontraron " + cantMatch + " matches");
+
+		/*for (var h = 1; h < 5; h++){
+			for(var j = 1; j < 7; j++){ //Columna
 
 				var valor = $("#fila-"+ h + "colum-"+ j).attr("src")
 				
@@ -48,7 +101,7 @@ $(document).ready(function(){
 					//console.log("Igualdad de 3 columnas")
 
 					$("#fila-"+ (h - 1) + "colum-"+ j).remove();
-			 		$("#fila-"+ h + "colum-"+ j ).remove();
+		 	 		$("#fila-"+ h + "colum-"+ j ).remove();
 			 		$("#fila-"+ (h + 1) + "colum-"+ j).remove();
 				}
 			}
@@ -70,7 +123,7 @@ $(document).ready(function(){
 			 		$("#fila-"+ h + "colum-"+ (j + 1)).remove();
 				}
 			}
-		}
+		}*/
 	}	
 
 	// Para validar y borrar filas y columnas de 3
@@ -97,21 +150,45 @@ $(document).ready(function(){
 	// Creación de la matriz de dulces
 	function creaDulces(){
 
-		var arrayDulces = new Array(6);
-		
+		arrayDulces = new Array(6);
 
 		// Creación matriz y asignar valor a cada elemento 
 		for(var a = 0; a < 6; a++){
 			arrayDulces[a] = new Array(7); 
 		}
-	
-		
+
+		for (var b = 0; b < 6 ; b++) {
+			for (var c = 0; c < 7; c++) {
+
+				let strDulce = randomRuta();
+
+				//let strCreacionDulce = "<img src="+ randomRuta()+" style='width:112px'; class='dragdrop'; id ='fila-"+ b +"colum-"+ c +"'>";
+				//let strCreacionDulce = "<img src='"+ strDulce +"' style='width:112px'; class='dragdrop'; id ='fila-"+ b +"colum-"+ c +"'>";
+
+				//var creacionDulces = $(".col-"+c).prepend("<img src="+ randomRuta()+" style='width:112px'; class='dragdrop'; id ='fila-"+ b +"colum-"+ c +"'>");
+				//var creacionDulces = $(".col-"+(c+1)).prepend(strCreacionDulce);
+
+				arrayDulces[b][c] = strDulce;		
+			}
+		}
+
+		/*console.log("Validando creacion de dulces\n");
+
 		for (var b = 0; b < 6 ; b++) {
 			for (var c = 1; c <= 7; c++) {
-	
-				var creacionDulces = $(".col-"+c).prepend("<img src="+ randomRuta()+" style='width:112px'; class='dragdrop'; id ='fila-"+ b +"colum-"+ c +"'>");
-	
-				arrayDulces[b][c] = creacionDulces;		
+				console.log(  arrayDulces[b][c] + "\n");
+			}
+		}*/
+	}
+
+	// Funcion para generar las imagenes
+	function pintarDulces(){
+		for (var b = 0; b < 6 ; b++) {
+			for (var c = 0; c < 7; c++) {
+				
+				let strCreacionDulce = "<img src='"+ arrayDulces[b][c] +"' style='width:112px'; class='dragdrop'; id ='fila-"+ b +"colum-"+ c +"'>";
+				$(".col-"+(c+1)).prepend(strCreacionDulce);
+
 			}
 		}
 	}
@@ -125,4 +202,5 @@ $(document).ready(function(){
 		return ruta
 	};
 
-});
+})
+;
